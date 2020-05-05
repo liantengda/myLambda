@@ -1,14 +1,19 @@
 package com.lian.myLambda.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Ted
  * @date 2020/5/1 1:09
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Person {
-    private String JapaneseName;
+
+    private String japaneseName;
     private Integer personId;
     private String englishName;
     private Integer grade;
@@ -16,11 +21,12 @@ public class Person {
     private Long updateTime;
     private String idCard;
 
-    public Person(Integer personId,String JapaneseName, String englishName,Long createTime,String idCard){
-        this.JapaneseName = JapaneseName;
+    public Person(Integer personId,String japaneseName, String englishName,Long createTime,String idCard,Integer grade){
+        this.japaneseName = japaneseName;
         this.personId = personId;
         this.englishName = englishName;
         this.createTime = createTime;
         this.idCard = idCard;
+        this.grade = grade;
     }
 }

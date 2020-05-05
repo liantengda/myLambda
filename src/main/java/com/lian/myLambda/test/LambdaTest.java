@@ -14,11 +14,11 @@ public class LambdaTest {
 
     public static void main(String[] args) {
         long now = System.currentTimeMillis();
-        Person black = new Person(1, "落葉吹雪", "ted", now, "1101");
-        Person red = new Person(2, "ココア", "kokoa", now, "1102");
-        Person yellow = new Person(3, "千尋", "chihiro", now, "1103");
-        Person green = new Person(4, "千夜", "chiya", now, "1104");
-        Person red2 = new Person(5, "小百合", "koyuri", now, "1105");
+        Person black = new Person(1, "落葉吹雪", "ted", now, "1101",1);
+        Person red = new Person(2, "ココア", "kokoa", now, "1102",1);
+        Person yellow = new Person(3, "千尋", "chihiro", now, "1103",2);
+        Person green = new Person(4, "千夜", "chiya", now, "1104",2);
+        Person red2 = new Person(5, "小百合", "koyuri", now, "1105",3);
 
         ArrayList<Person> personArrayList = new ArrayList<>();
         personArrayList.add(black);

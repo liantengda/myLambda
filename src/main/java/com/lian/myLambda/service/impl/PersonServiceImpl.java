@@ -9,45 +9,54 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PersonServiceImpl implements PersonService {
 
     @Autowired
-    PersonMapper PersonMapper;
+    PersonMapper personMapper;
 
     @Override
     public Person sel(int id){
-        Person Person = PersonMapper.findOneByPersonId(id);
+        Person Person = personMapper.findOneByPersonId(id);
         PersonEnum.PERSON_NOT_FOUND.assertNotNull(Person);
         return Person;
     }
 
     @Override
     public List<Person> list() {
-        List<Person> PersonList = PersonMapper.findPersonList();
+        List<Person> PersonList = personMapper.findPersonList();
         return PersonList;
     }
 
     @Override
-    public Person add(Person Person) {
-        List<Person> existCollect = PersonMapper.findPersonByIdCard(Person.getIdCard());
+    public Map<Integer, List<Person>> listGroupByGrade() {
+        Map<Integer, List<Person>> personListGroupByGrade = personMapper.findPersonListGroupByGrade();
+        return personListGroupByGrade;
+    }
+
+    @Override
+    public Person add(Person person) {
+        Person oneByPersonId = personMapper.findOneByPersonId(person.getPersonId());
+        PersonEnum.PERSON_ALREDY_EXIST.assertEquals(oneByPersonId,null);
+        List<Person> existCollect = personMapper.findPersonByIdCard(person.getIdCard());
         PersonEnum.PERSON_ALREDY_EXIST.assertEquals(existCollect.size(),0);
-        Person add = PersonMapper.add(Person);
+        Person add = personMapper.add(person);
         return add;
     }
 
     @Override
     public Person upd(Person Person) {
-        Person upd = PersonMapper.upd(Person);
+        Person upd = personMapper.upd(Person);
         return upd;
     }
 
     @Override
     public Person del(Integer id) {
-        Person Person = PersonMapper.findOneByPersonId(id);
+        Person Person = personMapper.findOneByPersonId(id);
         PersonEnum.PERSON_ALREDY_DELETED.assertNotNull(Person);
-        Person del = PersonMapper.del(id);
+        Person del = personMapper.del(id);
         return del;
     }
 

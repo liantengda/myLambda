@@ -3,6 +3,7 @@ package com.lian.myLambda.service;
 import com.lian.myLambda.model.Person;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -19,6 +20,12 @@ public interface PersonService {
     * @return
     */
    List<Person> list();
+
+   /**
+    * 根据年级分组获得人员列表
+    * @return
+    */
+   Map<Integer,List<Person>> listGroupByGrade();
 
    /**
     * 添加用户
