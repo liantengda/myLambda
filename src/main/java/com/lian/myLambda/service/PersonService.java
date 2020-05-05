@@ -28,7 +28,17 @@ public interface PersonService {
     */
    Map<Integer,List<Person>> listGroupByGrade();
 
+   /**
+    * 展示所有年级列表
+    * @return
+    */
    Set<Integer> listGrade();
+
+   /**
+    * 将成员列表中包含的国家用符号拼接起来
+    * @return
+    */
+   String putTogetherCountry(String symbol);
 
    /**
     * 添加用户

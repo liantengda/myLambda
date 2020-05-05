@@ -18,12 +18,12 @@ public class PersonMapper {
     private static Map<Integer,Person> personTable = new HashMap<>();
      static {
          long now = System.currentTimeMillis();
-         personTable.put(1,new Person(1,"落葉吹雪","ted",now,"1101",1));
-         personTable.put(2,new Person(2,"ココア","kokoa",now,"1102",1));
-         personTable.put(3,new Person(3,"千尋","chihiro",now,"1103",2));
-         personTable.put(4,new Person(4,"千夜","chiya",now,"1104",2));
-         personTable.put(5,new Person(5,"小百合","koyuri",now,"1105",3));
-         personTable.put(6,new Person(6,"アリア","aria",now,"1006",3));
+         personTable.put(1,new Person(1,"落葉吹雪","ted",now,"1101",1,"中国"));
+         personTable.put(2,new Person(2,"ココア","kokoa",now,"1102",1,"日本"));
+         personTable.put(3,new Person(3,"千尋","chihiro",now,"1103",2,"韩国"));
+         personTable.put(4,new Person(4,"千夜","chiya",now,"1104",2,"澳大利亚"));
+         personTable.put(5,new Person(5,"小百合","koyuri",now,"1105",3,"中国"));
+         personTable.put(6,new Person(6,"アリア","aria",now,"1006",3,"日本"));
     }
 
     /**
@@ -89,6 +89,16 @@ public class PersonMapper {
         List<Person> personList = findPersonList();
         TreeSet<Integer> gradeCollect = personList.stream().map(Person::getGrade).collect(Collectors.toCollection(TreeSet::new));
         return gradeCollect;
+    }
+
+    /**
+     * 将人员中包含的国家用某个字符拼接起来
+     * @return
+     */
+    public String putTogetherCountry(String symbol){
+        List<Person> personList = findPersonList();
+        String countryStr = personList.stream().map(Person::getCountry).collect(Collectors.toCollection(TreeSet::new)).stream().collect(Collectors.joining(symbol));
+        return countryStr;
     }
 
     public  Person add(Person person){

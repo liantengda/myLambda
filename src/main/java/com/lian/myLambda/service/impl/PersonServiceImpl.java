@@ -44,6 +44,12 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public String putTogetherCountry(String symbol) {
+        String countryStr = personMapper.putTogetherCountry(symbol);
+        return countryStr;
+    }
+
+    @Override
     public Person add(Person person) {
         Person add = personMapper.add(person);
         return add;

@@ -36,3 +36,7 @@ PersonController中的add，再添加人员的时候，默认如果已经有该i
 
 ScoreController中的listAverage和listTotalScore，根据personId进行分组，
 然后求出每个人的平均分，和总分。
+
+**将某属性转换为字符串拼接起来** :angry:
+
+PersonController中的countryStr/{symbol},将成员列表中所包含的国家用symbol字符拼接起来返回。
