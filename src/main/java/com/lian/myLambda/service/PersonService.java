@@ -4,6 +4,7 @@ import com.lian.myLambda.model.Person;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -26,6 +27,8 @@ public interface PersonService {
     * @return
     */
    Map<Integer,List<Person>> listGroupByGrade();
+
+   Set<Integer> listGrade();
 
    /**
     * 添加用户

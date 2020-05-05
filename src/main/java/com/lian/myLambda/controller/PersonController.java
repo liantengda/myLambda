@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @Author Ted
@@ -36,6 +37,12 @@ public class PersonController {
     @ResponseBody
     public R<Map<Integer,List<Person>>> listGroupByGrade(){
         return new R<>(personService.listGroupByGrade());
+    }
+
+    @RequestMapping(value = "/listGrade",method = RequestMethod.GET)
+    @ResponseBody
+    public R<Set<Integer>> listGradeCollect(){
+        return new R<>(personService.listGrade());
     }
 
     @RequestMapping(value = "/",method = RequestMethod.POST)

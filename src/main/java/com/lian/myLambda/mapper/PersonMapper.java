@@ -5,9 +5,7 @@ import com.lian.myLambda.constant.PersonEnum;
 import com.lian.myLambda.model.Person;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -29,18 +27,75 @@ public class PersonMapper {
     }
 
     /**
-     * 将人员按年级分组
+     * Map--->list
+     * personTable中key对应数据库中的主键，即主码。
+     *
+     * 获取人员总列表
+     * @return
+     */
+    public  List<Person> findPersonList(){
+        List<Person> collect = personTable.entrySet().stream().map(e -> e.getValue()).collect(Collectors.toList());
+        return collect;
+    }
+
+    /**
+     * 将人员按年级分组--->按照对象的某属性对list进行分组
+     *
+     * list->根据grade分组
      * @return
      */
     public Map<Integer,List<Person>> findPersonListGroupByGrade(){
-        List<Person> personList = personTable.entrySet().stream().map(m -> m.getValue()).collect(Collectors.toList());
+        List<Person> personList = findPersonList();
         Map<Integer, List<Person>> listGroupByGrade = personList.stream().collect(Collectors.groupingBy(p -> p.getGrade()));
         return listGroupByGrade;
     }
 
-    public  Person add(Person Person){
-        Person.setCreateTime(System.currentTimeMillis());
-        Person put = personTable.put(Person.getPersonId(), Person);
+    /**
+     * 根据身份证号筛选人员列表-->根据list集合中的单个属性筛选符合条件的集合
+     *
+     * list->根据idCard找到存在的人员集合
+     * @param idCard
+     * @return
+     */
+    public List<Person> findPersonByIdCard(String idCard){
+        List<Person> personList = findPersonList();
+        List<Person> existCollect = personList.stream().filter(e -> e.getIdCard().equals(idCard)).collect(Collectors.toList());
+        return existCollect;
+    }
+
+    /**
+     * 根据身份证或者id主键筛选人员列表-->根据list集合中对象的属性筛选出符合条件的集合
+     *
+     * list->根据idCard或者personId找到存在的人员集合（多条件筛选，与上一个用法类似）
+     * @param idCard
+     * @param personId
+     * @return
+     */
+    public List<Person> findPersonListByIdCardOrPersonId(String idCard,Integer personId){
+        List<Person> personList = findPersonList();
+        List<Person> existCollect = personList.stream().filter(
+                e -> e.getIdCard().equals(idCard) || e.getPersonId().equals(personId)
+        ).collect(Collectors.toList());
+        return existCollect;
+    }
+
+    /**
+     * 将grade去重，返回grade集合--->根据对象某属性去重，返回该属性集合
+     *
+     * list->根据人员列表获取人员的年级分类集合。
+     * @return
+     */
+    public Set<Integer> findGradeCollectByPersonList(){
+        List<Person> personList = findPersonList();
+        TreeSet<Integer> gradeCollect = personList.stream().map(Person::getGrade).collect(Collectors.toCollection(TreeSet::new));
+        return gradeCollect;
+    }
+
+    public  Person add(Person person){
+        List<Person> existCollect = findPersonListByIdCardOrPersonId(person.getIdCard(), person.getPersonId());
+        PersonEnum.PERSON_ALREDY_EXIST.assertEquals(existCollect.size(),0);
+        person.setCreateTime(System.currentTimeMillis());
+        Person put = personTable.put(person.getPersonId(), person);
         return put;
     }
 
@@ -64,16 +119,6 @@ public class PersonMapper {
         return Person;
     }
 
-    public  List<Person> findPersonList(){
-        List<Person> collect = personTable.entrySet().stream().map(e -> e.getValue()).collect(Collectors.toList());
-        return collect;
-    }
-
-    public List<Person> findPersonByIdCard(String idCard){
-        List<Person> collect = personTable.entrySet().stream().map(e -> e.getValue()).collect(Collectors.toList());
-        List<Person> existCollect = collect.stream().filter(e -> e.getIdCard().equals(idCard)).collect(Collectors.toList());
-        return existCollect;
-    }
 
 
     public static void main(String[] args) {

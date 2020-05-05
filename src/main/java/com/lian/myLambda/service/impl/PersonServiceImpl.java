@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -37,11 +38,13 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public Set<Integer> listGrade() {
+        Set<Integer> gradeSet = personMapper.findGradeCollectByPersonList();
+        return gradeSet;
+    }
+
+    @Override
     public Person add(Person person) {
-        Person oneByPersonId = personMapper.findOneByPersonId(person.getPersonId());
-        PersonEnum.PERSON_ALREDY_EXIST.assertEquals(oneByPersonId,null);
-        List<Person> existCollect = personMapper.findPersonByIdCard(person.getIdCard());
-        PersonEnum.PERSON_ALREDY_EXIST.assertEquals(existCollect.size(),0);
         Person add = personMapper.add(person);
         return add;
     }
