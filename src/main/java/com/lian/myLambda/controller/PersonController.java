@@ -73,6 +73,12 @@ public class PersonController {
         return new R<>(personService.putTogetherCountry(symbol));
     }
 
+    @RequestMapping(value = "/uppercaseName",method = RequestMethod.GET)
+    @ResponseBody
+    public R<List<Person>> EnglishNameUpperCase(){
+        return new R<>(personService.uppercaseEnglishName());
+    }
+
     /**
      * 添加一个成员
      * @param Person

@@ -40,6 +40,8 @@ public interface PersonService {
     */
    String putTogetherCountry(String symbol);
 
+   List<Person> uppercaseEnglishName();
+
    /**
     * 添加用户
     * @param Person

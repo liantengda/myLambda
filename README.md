@@ -40,3 +40,12 @@ ScoreController中的listAverage和listTotalScore，根据personId进行分组�
 **将某属性转换为字符串拼接起来** :angry:
 
 PersonController中的countryStr/{symbol},将成员列表中所包含的国家用symbol字符拼接起来返回。
+
+**对某属性进行大写处理** :innocent:
+
+PersonController中的uppercaseName，其实就是对对象中的某个属性进行操作，foreach的变形。
+
+**对某属性进行数据统计** :disappointed_relieved:
+
+ScoreController中的courseStatistic/{course}，取得分数列表中某门课程的所有统计数据，如最高分，
+最低分，平均分，总分，以及学习这们课程的人数。

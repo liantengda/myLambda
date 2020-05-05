@@ -92,6 +92,7 @@ public class PersonMapper {
     }
 
     /**
+     *
      * 将人员中包含的国家用某个字符拼接起来
      * @return
      */
@@ -99,6 +100,18 @@ public class PersonMapper {
         List<Person> personList = findPersonList();
         String countryStr = personList.stream().map(Person::getCountry).collect(Collectors.toCollection(TreeSet::new)).stream().collect(Collectors.joining(symbol));
         return countryStr;
+    }
+
+    /**
+     * 对list集合对象中的某个属性进行操作
+     *
+     * 将人员英文名称大写
+     * @return
+     */
+    public List<Person> upperCaseEnglishName(){
+        List<Person> personList = findPersonList();
+        personList.forEach(item -> item.setEnglishName(item.getEnglishName().toUpperCase()));
+        return personList;
     }
 
     public  Person add(Person person){

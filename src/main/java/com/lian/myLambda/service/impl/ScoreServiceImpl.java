@@ -43,4 +43,10 @@ public class ScoreServiceImpl implements ScoreService {
         Map<Integer, Double> totalScoreEveryOne = scoreMapper.findTotalScoreEveryOne();
         return totalScoreEveryOne;
     }
+
+    @Override
+    public Map<String, Object> findStatisticOfCourse(String course) {
+        Map<String, Object> statisticOfCourse = scoreMapper.findStatisticOfCourse(course);
+        return statisticOfCourse;
+    }
 }

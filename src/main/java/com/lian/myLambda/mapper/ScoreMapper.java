@@ -82,4 +82,21 @@ public class ScoreMapper {
         Map<Integer, Double> totalScoreCollect = allScoreList.stream().collect(Collectors.groupingBy(Score::getPersonId, Collectors.summingDouble(Score::getScore)));
         return totalScoreCollect;
     }
+
+    /**
+     * 取得分数列表中某门课程的所有统计数据（最高分，最低分，平均分，总分，以及学习这们课程的人数）
+     * @param course
+     * @return
+     */
+    public Map<String,Object> findStatisticOfCourse(String course){
+        List<Score> allScoreList = findAllScoreList();
+        DoubleSummaryStatistics courseStatistics = allScoreList.stream().filter(p -> p.getCourse().equals(course)).mapToDouble(item -> item.getScore()).summaryStatistics();
+        HashMap<String, Object> courseStatisticMap = new HashMap<>();
+        courseStatisticMap.put("max",courseStatistics.getMax());
+        courseStatisticMap.put("min",courseStatistics.getMin());
+        courseStatisticMap.put("sun",courseStatistics.getSum());
+        courseStatisticMap.put("count",courseStatistics.getCount());
+        courseStatisticMap.put("average",courseStatistics.getAverage());
+        return courseStatisticMap;
+    }
 }

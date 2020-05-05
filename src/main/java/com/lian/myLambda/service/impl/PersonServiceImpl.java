@@ -50,6 +50,12 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public List<Person> uppercaseEnglishName() {
+        List<Person> personList = personMapper.upperCaseEnglishName();
+        return personList;
+    }
+
+    @Override
     public Person add(Person person) {
         Person add = personMapper.add(person);
         return add;

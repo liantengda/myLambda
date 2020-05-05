@@ -26,5 +26,11 @@ public interface ScoreService {
      */
     Map<Integer,Double> findAllPersonAverageScore();
 
+    /**
+     * 获取每个人的总分
+     * @return
+     */
     Map<Integer,Double> findAllTotalScoreEveryOne();
+
+    Map<String,Object> findStatisticOfCourse(String course);
 }
