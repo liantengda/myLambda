@@ -8,13 +8,19 @@ import lombok.Data;
  */
 @Data
 public class Person {
-    private String name;
-    private Long personId;
+    private String JapaneseName;
+    private Integer personId;
     private String englishName;
+    private Integer grade;
+    private Long createTime;
+    private Long updateTime;
+    private String idCard;
 
-    public Person(String name, Long personId, String englishName){
-        this.name = name;
+    public Person(Integer personId,String JapaneseName, String englishName,Long createTime,String idCard){
+        this.JapaneseName = JapaneseName;
         this.personId = personId;
         this.englishName = englishName;
+        this.createTime = createTime;
+        this.idCard = idCard;
     }
 }

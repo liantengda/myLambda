@@ -11,11 +11,11 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum UserEnum implements BusinessExceptionAssert {
+public enum PersonEnum implements BusinessExceptionAssert {
 
-    USER_NOT_FOUND(6001,"未找到此用户"),
-    USER_ALREDY_DELETED(6002,"用户已经被删除"),
-    USER_ALREDY_EXIST(6003,"已注册用户，不可再次注册");
+    PERSON_NOT_FOUND(6001,"未找到此用户"),
+    PERSON_ALREDY_DELETED(6002,"用户已经被删除"),
+    PERSON_ALREDY_EXIST(6003,"已注册用户，不可再次注册");
     private int code;
     private String message;
 }

@@ -1,42 +1,42 @@
 package com.lian.myLambda.service;
 
-import com.lian.myLambda.model.User;
+import com.lian.myLambda.model.Person;
 
 import java.util.List;
 
 /**
  *
  */
-public interface UserService {
+public interface PersonService {
    /**
     * @param id 用户信息主键
     * @return
     */
-   User sel(int id);
+   Person sel(int id);
 
    /**
     * 获取用户信息列表
     * @return
     */
-   List<User> list();
+   List<Person> list();
 
    /**
     * 添加用户
-    * @param user
+    * @param Person
     * @return
     */
-   User add(User user);
+   Person add(Person Person);
    /**
     * 更新用户
-    * @param user
+    * @param Person
     * @return
     */
-   User upd(User user);
+   Person upd(Person Person);
 
    /**
     * 删除用户
      * @param id
     * @return
     */
-   User del(Integer id);
+   Person del(Integer id);
 }
