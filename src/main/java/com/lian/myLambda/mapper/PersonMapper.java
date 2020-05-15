@@ -46,7 +46,8 @@ public class PersonMapper {
      */
     public Map<Integer,List<Person>> findPersonListGroupByGrade(){
         List<Person> personList = findPersonList();
-        Map<Integer, List<Person>> listGroupByGrade = personList.stream().collect(Collectors.groupingBy(p -> p.getGrade()));
+        Map<Integer, List<Person>> listGroupByGrade = personList.stream().collect(
+                Collectors.groupingBy(p -> p.getGrade()));
         return listGroupByGrade;
     }
 
@@ -87,7 +88,11 @@ public class PersonMapper {
      */
     public Set<Integer> findGradeCollectByPersonList(){
         List<Person> personList = findPersonList();
-        TreeSet<Integer> gradeCollect = personList.stream().map(Person::getGrade).collect(Collectors.toCollection(TreeSet::new));
+        TreeSet<Integer> gradeCollect = personList.stream().map(
+                Person::getGrade
+        ).collect(
+                Collectors.toCollection(TreeSet::new)
+        );
         return gradeCollect;
     }
 
@@ -98,7 +103,11 @@ public class PersonMapper {
      */
     public String putTogetherCountry(String symbol){
         List<Person> personList = findPersonList();
-        String countryStr = personList.stream().map(Person::getCountry).collect(Collectors.toCollection(TreeSet::new)).stream().collect(Collectors.joining(symbol));
+        String countryStr = personList.stream().map(
+                Person::getCountry).collect(Collectors.toCollection(TreeSet::new)
+        ).stream().collect(
+                Collectors.joining(symbol)
+        );
         return countryStr;
     }
 

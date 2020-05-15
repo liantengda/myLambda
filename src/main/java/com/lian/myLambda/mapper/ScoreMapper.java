@@ -69,7 +69,9 @@ public class ScoreMapper {
      */
     public Map<Integer,Double> findAllAverageScoreGroupByPersonId(){
         List<Score> allScoreList = findAllScoreList();
-        Map<Integer, Double> allAverageScore = allScoreList.stream().collect(Collectors.groupingBy(Score::getPersonId, Collectors.averagingDouble(Score::getScore)));
+        Map<Integer, Double> allAverageScore = allScoreList.stream().collect(
+                Collectors.groupingBy(Score::getPersonId, Collectors.averagingDouble(Score::getScore))
+        );
         return allAverageScore;
     }
 
@@ -90,7 +92,11 @@ public class ScoreMapper {
      */
     public Map<String,Object> findStatisticOfCourse(String course){
         List<Score> allScoreList = findAllScoreList();
-        DoubleSummaryStatistics courseStatistics = allScoreList.stream().filter(p -> p.getCourse().equals(course)).mapToDouble(item -> item.getScore()).summaryStatistics();
+        DoubleSummaryStatistics courseStatistics = allScoreList.stream().filter(
+                p -> p.getCourse().equals(course)
+        ).mapToDouble(
+                item -> item.getScore()
+        ).summaryStatistics();
         HashMap<String, Object> courseStatisticMap = new HashMap<>();
         courseStatisticMap.put("max",courseStatistics.getMax());
         courseStatisticMap.put("min",courseStatistics.getMin());
