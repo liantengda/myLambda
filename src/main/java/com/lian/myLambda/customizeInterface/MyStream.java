@@ -8,11 +8,8 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /**
- * A sequence of elements supporting sequential and parallel aggregate
- * operations.  The following example illustrates an aggregate operation using
- * {@link Stream} and {@link java.util.stream.IntStream}:
  *
- * 一个支持顺序和平行聚合操作的元素序列，以下例子将阐述一个聚合操作通过使用Stream接口和IntStream接口
+ * 一个支持串行集合操作和并行集合操作的元素序列，以下例子将阐述如何通过使用Stream接口和IntStream接口进行一个集合操作
  * <pre>{@code
  *     int sum = widgets.stream()
  *                      .filter(w -> w.getColor() == RED)
@@ -20,40 +17,18 @@ import java.util.stream.Stream;
  *                      .sum();
  * }</pre>
  *
- * In this example, {@code widgets} is a {@code Collection<Widget>}.  We create
- * a stream of {@code Widget} objects via {@link java.util.Collection#stream Collection.stream()},
- * filter it to produce a stream containing only the red widgets, and then
- * transform it into a stream of {@code int} values representing the weight of
- * each red widget. Then this stream is summed to produce a total weight.
- * 在这个例子中，widgets是一个集合，意思是装小部件的容器，我们通过Collection接口的steam方法创建了一个装有
- * 小部件的stream，然后根据第一个条件过滤出了颜色为红色小部件stream，之后我们取每个红色小部件的重量属性，组成了一个
- * 只含有重量属性的stream，重量属性的类型是int类型，之后把重量stream中的数值全部相加得到总重量，整个过程就是这样的
+ * 在这个例子中，widgets是一个集合，里面装的是一堆小部件（widget）对象，我们通过Collection接口的steam方法创建了一个装有
+ * 小部件的stream，然后根据第一个条件过滤出了颜色为红色的小部件stream，之后我们取每个红色小部件的重量属性，组成了一个
+ * 只含有重量属性的stream，重量属性的类型是int类型，之后把重量stream中的数值全部相加得到总重量，整个过程总结起来如下：
  * 计算一堆小部件中，红色小部件的总重量。
- *
- * <p>In addition to {@code Stream}, which is a stream of object references,
- * there are primitive specializations for {@link java.util.stream.IntStream}, {@link java.util.stream.LongStream},
- * and {@link java.util.stream.DoubleStream}, all of which are referred to as "streams" and
- * conform to the characteristics and restrictions described here.
  *
  * 除了Object引用的Stream之外，还有一些原始的专用Stream，比如 IntStream,LongStream,DoubleStream,这些都可以被称作
  * streams 同时都遵从这里所提到的规则与约束。
  *
- * <p>To perform a computation, stream
- * <a href="package-summary.html#StreamOps">operations</a> are composed into a
- * <em>stream pipeline</em>.  A stream pipeline consists of a source (which
- * might be an array, a collection, a generator function, an I/O channel,
- * etc), zero or more <em>intermediate operations</em> (which transform a
- * stream into another stream, such as {@link Stream#filter(Predicate)}), and a
- * <em>terminal operation</em> (which produces a result or side-effect, such
- * as {@link Stream#count()} or {@link Stream#forEach(Consumer)}).
- * Streams are lazy; computation on the source data is only performed when the
- * terminal operation is initiated, and source elements are consumed only
- * as needed.
- *
- * 为了 进行计算，stream操作 被装进了 一个stream管道。一个stream管道由 数据源（可能是一个数组，一个集合，一个生成器
- * 或者一个I/O管道等等），0个或者多个中间操作（将steam转换为另一个stream，例如通过Stream接口的filter方法），一个最终
- * 操作（产生一个结果集或者起到一种作用，例如Stream接口的count方法或者Stream接口的forEach方法）。Streams是懒惰的，
- * 只有当最终操作被初始化，在数据源上的计算过程才能被执行并且数据源元素在需要的时候才被引入管道。
+ * 为了进行计算，stream操作被组装进一个stream管道。一个stream管道由数据源、0个或者多个中间操作和一个最终操作组成。其中
+ * 数据源指的可能是一个数组，一个集合，一个生成函数或者一个I/O通道等等，中间操作指的是通过map或者filter等这样的方法将steam
+ * 转换为另一个stream的操作，最终操作指的是产生一个结果集或者起到一种作用，例如Stream接口的count方法或者Stream接口的forEach方法。
+ * Stream的操作具有延迟性，只有在需要结果的时候这一过程才会被执行。
  *
  * <p>Collections and streams, while bearing some superficial similarities,
  * have different goals.  Collections are primarily concerned with the efficient
@@ -145,4 +120,5 @@ import java.util.stream.Stream;
  * @see <a href="package-summary.html">java.util.stream</a>
  */
 public interface MyStream {
+
 }

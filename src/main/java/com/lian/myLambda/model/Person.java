@@ -21,6 +21,7 @@ public class Person {
     private Long createTime;
     private Long updateTime;
     private String idCard;
+    private Double salary;
 
     public Person(Integer personId,String japaneseName, String englishName,Long createTime,String idCard,Integer grade,String country){
         this.japaneseName = japaneseName;
@@ -30,5 +31,15 @@ public class Person {
         this.idCard = idCard;
         this.grade = grade;
         this.country = country;
+    }
+    public Person(Integer personId,String japaneseName, String englishName,Long createTime,String idCard,Integer grade,String country,Double salary){
+        this.japaneseName = japaneseName;
+        this.personId = personId;
+        this.englishName = englishName;
+        this.createTime = createTime;
+        this.idCard = idCard;
+        this.grade = grade;
+        this.country = country;
+        this.salary = salary;
     }
 }
