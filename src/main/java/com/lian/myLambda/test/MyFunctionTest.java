@@ -16,6 +16,11 @@ public class MyFunctionTest {
     public static void main(String[] args) {
         Integer operation = operation(200, y -> y*100);
         System.out.println(operation);
+
+        operation(300,y-> y+100);
+
+        Integer operation1 = operation(300, (y) -> 1000);
+        System.out.println(operation1);
     }
 
 }
