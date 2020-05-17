@@ -4,7 +4,6 @@ import com.lian.myLambda.model.Person;
 
 import java.util.ArrayList;
 import java.util.OptionalDouble;
-import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 import java.util.stream.Stream;
 
@@ -32,22 +31,30 @@ public class StreamTest {
         Person yellow = new Person(3, "千尋", "chihiro", now, "1103",2,"中国",4000.00);
         Person green = new Person(4, "千夜", "chiya", now, "1104",2,"中国",6000.00);
         Person red2 = new Person(5, "小百合", "koyuri", now, "1105",3,"中国",16000.00);
-        Person[] personArray = new Person[]{black,red,green,yellow,red2};
         ArrayList<Person> personArrayList = new ArrayList<>();
         personArrayList.add(black);
         personArrayList.add(red);
         personArrayList.add(yellow);
         personArrayList.add(green);
         personArrayList.add(red2);
-        //根据特定属性去重,并输出特定属性
-        personArrayList.stream().collect(Collectors.groupingBy(p->p.getJapaneseName(),Collectors.summingLong(Person::getPersonId))).forEach((name, personId)-> System.out.println("name:"+name+":"+"personId"+personId));
-
-       //算出英文名包含c字母的员工的平均工资
-        Stream<Person> sourceStream = personArrayList.stream();
-        Stream<Person> englishStream = sourceStream.filter(person -> person.getEnglishName().contains("c"));
+        //需求---》算出英文名包含c字母的中国员工的平均工资
+        Stream<Person> dataSourceStream = personArrayList.stream();
+        Stream<Person> englishStream = dataSourceStream.filter(person -> person.getEnglishName().contains("c"));
+        Stream<Person> countryStream = englishStream.filter(person -> person.getCountry().equals("中国"));
         DoubleStream salaryStream = englishStream.mapToDouble(Person::getSalary);
         OptionalDouble average = salaryStream.average();
-        System.out.println(average);
+        System.out.println("算出英文名中包含c字母的中国员工的平均工资-->"+average);
+
+//
+//        //根据特定属性去重,并输出特定属性
+//        personArrayList.stream().collect(Collectors.groupingBy(p->p.getJapaneseName(),Collectors.summingLong(Person::getPersonId))).forEach((name, personId)-> System.out.println("name:"+name+":"+"personId"+personId));
+//
+//       //算出英文名包含c字母的员工的平均工资
+//        Stream<Person> sourceStream = personArrayList.stream();
+//        Stream<Person> englishStream = sourceStream.filter(person -> person.getEnglishName().contains("c"));
+//        DoubleStream salaryStream = englishStream.mapToDouble(Person::getSalary);
+//        OptionalDouble average = salaryStream.average();
+//        System.out.println(average);
 //        Map<String, Long> collect = stream.collect(Collectors.groupingBy(p -> p.getJapaneseName(), Collectors.summingLong(Person::getPersonId)));
 //        collect.forEach((name,personId)-> System.out.println("name:"+name+":"+"personId"+personId));
 //        personArrayList.forEach(value-> System.out.println(value));
