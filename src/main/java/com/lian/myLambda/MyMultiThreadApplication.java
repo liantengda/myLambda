@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-public class MyLambdaApplication {
+public class MyMultiThreadApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MyLambdaApplication.class, args);
+        SpringApplication.run(MyMultiThreadApplication.class, args);
     }
 
 }
